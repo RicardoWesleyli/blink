@@ -8,13 +8,62 @@ No camera. No gaze tracking. No screen capture. No network.
 
 **[中文说明](README.zh-CN.md)**
 
-![Blink menu panel](screenshots/en/menu.png)
+<p align="center">
+  <img src="screenshots/en/menu.png" width="380" alt="Blink menu bar panel">
+</p>
 
 ## Why another break reminder
 
 Every break app tells you to look away. Twenty seconds later you go back to the same stare, and nothing has changed.
 
 Blink treats the break as something you *do*, not something you wait out. The screen blurs, a ring fills up, and a dot starts moving. Your eyes follow it — off-center, in a slow circle, far then near. It takes 60 to 90 seconds and there is nothing to read.
+
+## One session, three screens
+
+<table>
+<tr>
+<td align="center" width="33%"><img src="screenshots/en/training-intro.png" width="260" alt="Intro"><br><b>Before</b><br><sub>What it does, and what it doesn't ask for.</sub></td>
+<td align="center" width="33%"><img src="screenshots/en/training.png" width="260" alt="Follow the dot"><br><b>During</b><br><sub>A dot, a slow circle, a focus shift. No text to read.</sub></td>
+<td align="center" width="33%"><img src="screenshots/en/training-finish.png" width="260" alt="Done"><br><b>After</b><br><sub>One line, and the option to step away.</sub></td>
+</tr>
+</table>
+
+## The break
+
+Your desktop is blurred behind the scene, not replaced by black. The ring fills clockwise as time passes, the number in the middle counts down, and hovering the ring pauses it — no button needed.
+
+<p align="center">
+  <img src="screenshots/en/break.png" width="720" alt="Full-screen break">
+</p>
+
+## The routines
+
+Four of them, 60–90 seconds each. Same four movements, different order, pace and wording:
+
+| | |
+|---|---|
+| **Screen break** | After a long stretch at the screen. Follow the dot around. |
+| **Morning wake** | Your eyes aren't focused yet. Slow is fine. |
+| **Dry eyes** | When they feel scratchy, keep them closed longer. |
+| **Before sleep** | Let your eyes loosen before the lights go out. |
+
+Blink picks one based on the time of day and how many you've already done.
+
+## Step away
+
+After a routine, you can turn the screen into a system update screen. Click anywhere to come back; it ends itself after three minutes. Useful when you want to leave the desk without leaving the computer looking idle.
+
+<p align="center">
+  <img src="screenshots/en/camouflage.png" width="720" alt="Step away screen">
+</p>
+
+## Reminders
+
+Interval 5–240 minutes, break length 10 seconds to 10 minutes, both with presets. A small card slides down from the menu bar and never takes focus. It also waits: if you're away from the keyboard, or a full-screen app is in front, the timer holds instead of nagging you the moment you come back.
+
+<p align="center">
+  <img src="screenshots/en/reminder-card.png" width="300" alt="Reminder card">
+</p>
 
 ## Install
 
@@ -30,15 +79,6 @@ open /Applications/Blink.app
 ```
 
 Requires macOS 13 or later, Apple silicon or Intel.
-
-## What's in it
-
-- **Reminders** — interval from 5 to 240 minutes, break length from 10 seconds to 10 minutes. A small card slides down from the menu bar; it never takes focus.
-- **The break** — full screen Gaussian blur, ring fills as time passes, the number counts down. Hover the ring to pause.
-- **Eye training** — four 60–90 second routines: *Screen break*, *Morning wake*, *Dry eyes*, *Before sleep*. Same four movements, different order, pace and wording.
-- **Step away** — after a session, turn the screen into a system update screen. Click anywhere to come back; it ends itself after 3 minutes.
-- **Stats** — streak, minutes this week, rests today. All local.
-- **Languages** — English and 简体中文, switchable from the panel's bottom-left globe menu, applied instantly.
 
 ## Privacy
 
