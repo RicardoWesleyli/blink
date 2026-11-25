@@ -151,4 +151,4 @@ Early, and honest about it.
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+Code is MIT — see [LICENSE](LICENSE). The name and the icon are not: fork it, ship it, sell it, but call it something else. See [TRADEMARK.md](TRADEMARK.md).

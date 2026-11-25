@@ -149,4 +149,4 @@ build.sh                      编译 → 组装 → 签名 → 打 dmg
 
 ## 许可
 
-MIT，见 [LICENSE](LICENSE)。
+代码是 MIT，见 [LICENSE](LICENSE)。名字和图标不在授权范围内：你可以 fork、发布、出售，但请换个名字。见 [TRADEMARK.md](TRADEMARK.md)。
