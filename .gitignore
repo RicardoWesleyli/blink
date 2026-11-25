@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+
+# SwiftPM
+.build/
+Package.resolved
+
+# Build output — distributed through GitHub Releases, not commits
+build/
+*.dmg
+*.app
+
+# Launch media (for 小红书 / Product Hunt, not source)
+videos/
+
+# Playground
+.swiftpm/
+xcuserdata/
