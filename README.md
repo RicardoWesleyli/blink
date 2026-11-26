@@ -12,6 +12,14 @@ No camera. No gaze tracking. No screen capture. No network.
   <img src="screenshots/en/menu.png" width="380" alt="Blink menu bar panel">
 </p>
 
+## In motion
+
+<p align="center">
+  <img src="screenshots/blink-demo.gif" width="700" alt="The dot moving through four routines">
+</p>
+
+Eleven seconds out of a session, looping — four movements, in the order you'd actually do them. The [24-second version](media/blink-training-24s-en.mp4) keeps the original pacing.
+
 ## Why another break reminder
 
 Every break app tells you to look away. Twenty seconds later you go back to the same stare, and nothing has changed.

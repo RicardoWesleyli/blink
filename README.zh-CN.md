@@ -12,6 +12,14 @@ macOS 菜单栏应用。长时间盯着屏幕时，它会打断你：全屏模�
   <img src="screenshots/panel-training.png" width="380" alt="Blink 菜单面板">
 </p>
 
+## 动起来
+
+<p align="center">
+  <img src="screenshots/blink-demo-zh.gif" width="700" alt="光点在四段动作里移动">
+</p>
+
+训练里的十一秒，循环播放——四段动作，按你实际会做的顺序。另有 [24 秒完整版](media/blink-training-24s-zh.mp4)，节奏是原始的。
+
 ## 为什么还要一个护眼提醒
 
 几乎所有休息类应用都在提醒你「看远处」。看二十秒，然后回到同一个姿势，什么都没改变。
