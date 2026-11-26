@@ -54,7 +54,15 @@ struct Stage {
     let duration: Double
 }
 
-let stages = [
+// 语言开关：第四个参数传 en 则输出英文版
+let isEN = CommandLine.arguments.count >= 4 && CommandLine.arguments[3] == "en"
+
+let stages = isEN ? [
+    Stage(title: "Follow the dot", hint: "Move your eyes, keep your head still", duration: 24),
+    Stage(title: "Go around", hint: "Let your gaze travel slowly around the circle", duration: 18),
+    Stage(title: "Far, then near", hint: "Hold the center, feel the focus shift", duration: 16),
+    Stage(title: "Just close them", hint: "Close your eyes, nothing to do", duration: 12)
+] : [
     Stage(title: "跟随移动", hint: "眼睛跟着光点走，头保持不动", duration: 24),
     Stage(title: "环绕放松", hint: "让视线绕着圈慢慢转，不用追速度", duration: 18),
     Stage(title: "远近交替", hint: "盯住中心，感受焦距在远近之间切换", duration: 16),
@@ -63,7 +71,13 @@ let stages = [
 
 let totalDuration = stages.reduce(0) { $0 + $1.duration }
 
-func stageIndex(at t: Double) -> (index: Int, elapsed: Double, overall: Double) {
+func stageIndex(at t: Double, short: Bool = false) -> (index: Int, elapsed: Double, overall: Double) {
+    if short {
+        let perStage = 6.0
+        let total = perStage * Double(stages.count)
+        let i = min(stages.count - 1, Int(t / perStage))
+        return (i, t - Double(i) * perStage, min(1, t / total))
+    }
     var acc = 0.0
     for (i, s) in stages.enumerated() {
         if t < acc + s.duration {
@@ -121,12 +135,12 @@ func drawTrainingDot(_ ctx: CGContext, at point: CGPoint, scale: CGFloat) {
     fillCircle(ctx, center: point, radius: 6.5 * scale, color: accent)
 }
 
-func drawTrainingFrame(_ ctx: CGContext, t: Double) {
+func drawTrainingFrame(_ ctx: CGContext, t: Double, short: Bool = false) {
     // 背景
     ctx.setFillColor(NSColor.black.cgColor)
     ctx.fill(CGRect(x: 0, y: 0, width: W, height: H))
 
-    let (index, elapsed, overall) = stageIndex(at: t)
+    let (index, elapsed, overall) = stageIndex(at: t, short: short)
     let stage = stages[index]
     let center = CGPoint(x: W / 2, y: H * 0.53)
     let radius = min(W, H) * 0.30
@@ -178,11 +192,14 @@ func drawTrainingFrame(_ ctx: CGContext, t: Double) {
                     width: barWidth * CGFloat(overall), height: 3))
 
     let remaining = Int(ceil(stage.duration - elapsed))
-    drawText("\(remaining) 秒 · 第 \(index + 1) / \(stages.count) 段",
+    let counter = isEN
+        ? "\(remaining)s · \(index + 1) of \(stages.count)"
+        : "\(remaining) 秒 · 第 \(index + 1) / \(stages.count) 段"
+    drawText(counter,
              font: monoFont(12, .medium),
              color: NSColor.white.withAlphaComponent(0.55), topY: 704)
 
-    drawText("按 Esc 结束", font: .systemFont(ofSize: 11),
+    drawText(isEN ? "Press Esc to finish" : "按 Esc 结束", font: .systemFont(ofSize: 11),
              color: NSColor.white.withAlphaComponent(0.26), topY: 758)
 }
 
@@ -216,15 +233,19 @@ func drawBreakFrame(_ ctx: CGContext, t: Double, total: Double) {
 
     drawText("\(Int(ceil(remaining)))", font: roundedFont(52, .light),
              color: NSColor.white.withAlphaComponent(0.94), topY: ringCenter.y - 40)
-    drawText("秒", font: .systemFont(ofSize: 10),
-             color: NSColor.white.withAlphaComponent(0.34), topY: ringCenter.y + 28)
+    if !isEN {
+        drawText("秒", font: .systemFont(ofSize: 10),
+                 color: NSColor.white.withAlphaComponent(0.34), topY: ringCenter.y + 28)
+    }
 
-    drawText("望向 6 米以外", font: roundedFont(25, .medium),
+    drawText(isEN ? "Look 20 feet away" : "望向 6 米以外", font: roundedFont(25, .medium),
              color: NSColor.white.withAlphaComponent(0.92), topY: ringCenter.y + 140)
-    drawText("让睫状肌松开，这一刻不用看屏幕", font: .systemFont(ofSize: 13),
+    drawText(isEN ? "Let your ciliary muscle relax. Stop looking at the screen." : "让睫状肌松开，这一刻不用看屏幕",
+             font: .systemFont(ofSize: 13),
              color: NSColor.white.withAlphaComponent(0.42), topY: ringCenter.y + 180)
 
-    drawText("按任意键 结束休息", font: .systemFont(ofSize: 11),
+    drawText(isEN ? "Press any key to end the break" : "按任意键 结束休息",
+             font: .systemFont(ofSize: 11),
              color: NSColor.white.withAlphaComponent(0.30), topY: H - 38)
 }
 
@@ -319,6 +340,10 @@ switch mode {
 case "train":
     try renderVideo(to: output, seconds: totalDuration) { ctx, t in
         drawTrainingFrame(ctx, t: t)
+    }
+case "train-short":
+    try renderVideo(to: output, seconds: 6.0 * Double(stages.count)) { ctx, t in
+        drawTrainingFrame(ctx, t: t, short: true)
     }
 case "break":
     try renderVideo(to: output, seconds: 30) { ctx, t in

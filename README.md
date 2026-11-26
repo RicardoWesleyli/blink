@@ -30,7 +30,7 @@ Blink treats the break as something you *do*, not something you wait out. The sc
 
 ## The break
 
-Your desktop is blurred behind the scene, not replaced by black. The ring fills clockwise as time passes, the number in the middle counts down, and hovering the ring pauses it — no button needed.
+Your desktop is blurred behind the scene, not replaced by black. (The screenshot below was rendered offscreen — in the real app your own desktop shows through as a soft blur.) The ring fills clockwise as time passes, the number in the middle counts down, and hovering the ring pauses it — no button needed.
 
 <p align="center">
   <img src="screenshots/en/break.png" width="720" alt="Full-screen break">

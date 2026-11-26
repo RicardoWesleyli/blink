@@ -10,7 +10,13 @@ struct BlurBackdrop: NSViewRepresentable {
     var material: NSVisualEffectView.Material = .hudWindow
     var darkening: Double = 0.0
 
-    func makeNSView(context: Context) -> NSVisualEffectView {
+    func makeNSView(context: Context) -> NSView {
+        // 离屏渲染时窗口背后没有内容可采样，系统会把材质画成一块不透明的灰。
+        // 快照模式直接给一个透明空视图，让下面的纯黑露出来，避免整张图蒙一层灰。
+        if ProcessInfo.processInfo.environment["BLINK_SNAPSHOT"] == "1" {
+            return NSView()
+        }
+
         let view = NSVisualEffectView()
         view.material = material
         view.blendingMode = .behindWindow
@@ -20,10 +26,11 @@ struct BlurBackdrop: NSViewRepresentable {
         return view
     }
 
-    func updateNSView(_ view: NSVisualEffectView, context: Context) {
-        view.material = material
-        view.blendingMode = .behindWindow
-        view.state = .active
+    func updateNSView(_ view: NSView, context: Context) {
+        guard let effect = view as? NSVisualEffectView else { return }
+        effect.material = material
+        effect.blendingMode = .behindWindow
+        effect.state = .active
     }
 }
 
