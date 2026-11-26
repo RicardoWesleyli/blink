@@ -15,70 +15,29 @@ final class CamouflageSession: ObservableObject {
     }
 }
 
-/// 一个完整的苹果：没有咬口，也就不是 Apple 的标志。
-/// 用一条连续的手绘轮廓，顶部中间下凹（果梗的位置），两侧圆润，底部收拢，
-/// 比并集一堆椭圆更容易做出"苹果"的体感。
-struct AppleFruitShape: Shape {
-    func path(in rect: CGRect) -> Path {
-        var p = Path()
-        let w = rect.width
-        let h = rect.height
-
-        func pt(_ x: CGFloat, _ y: CGFloat) -> CGPoint {
-            CGPoint(x: rect.minX + x * w, y: rect.minY + y * h)
-        }
-
-        p.move(to: pt(0.50, 0.17))
-        p.addCurve(to: pt(0.86, 0.40), control1: pt(0.70, 0.11), control2: pt(0.85, 0.23))
-        p.addCurve(to: pt(0.92, 0.68), control1: pt(0.96, 0.48), control2: pt(0.98, 0.58))
-        p.addCurve(to: pt(0.50, 0.99), control1: pt(0.90, 0.88), control2: pt(0.68, 1.00))
-        p.addCurve(to: pt(0.08, 0.68), control1: pt(0.32, 1.00), control2: pt(0.10, 0.88))
-        p.addCurve(to: pt(0.14, 0.40), control1: pt(0.02, 0.58), control2: pt(0.04, 0.48))
-        p.addCurve(to: pt(0.50, 0.17), control1: pt(0.15, 0.23), control2: pt(0.30, 0.11))
-        return p
-    }
-}
-
-/// 一片两头尖的叶子，比椭圆更像叶，不会堆成菠萝冠。
-struct AppleLeafShape: Shape {
-    func path(in rect: CGRect) -> Path {
-        var p = Path()
-        func pt(_ x: CGFloat, _ y: CGFloat) -> CGPoint {
-            CGPoint(x: rect.minX + x * rect.width, y: rect.minY + y * rect.height)
-        }
-        p.move(to: pt(0.02, 0.55))
-        p.addQuadCurve(to: pt(0.98, 0.08), control: pt(0.34, -0.04))
-        p.addQuadCurve(to: pt(0.02, 0.55), control: pt(0.42, 0.78))
-        return p
-    }
-}
-
 struct AppleFruitMark: View {
     var size: CGFloat = 52
-    var tint: Color = Color.white.opacity(0.88)
+    var opacity: Double = 0.88
+
+    /// 白色苹果剪影，从资源包加载（不是自绘，也不是 Apple 商标里那个带咬口的标志）
+    private static let mark: NSImage? = {
+        guard let url = Bundle.module.url(forResource: "apple-mark", withExtension: "png") else {
+            return nil
+        }
+        return NSImage(contentsOf: url)
+    }()
 
     var body: some View {
-        ZStack {
-            AppleFruitShape()
-                .fill(tint)
-                .frame(width: size * 0.96, height: size * 1.02)
-                .offset(y: size * 0.12)
-
-            // 梗
-            Capsule()
-                .fill(tint)
-                .frame(width: size * 0.058, height: size * 0.20)
-                .rotationEffect(.degrees(10))
-                .offset(x: size * 0.02, y: -size * 0.315)
-
-            // 叶
-            AppleLeafShape()
-                .fill(tint)
-                .frame(width: size * 0.50, height: size * 0.22)
-                .rotationEffect(.degrees(-22))
-                .offset(x: size * 0.225, y: -size * 0.36)
+        Group {
+            if let mark = Self.mark {
+                Image(nsImage: mark)
+                    .resizable()
+                    .interpolation(.high)
+                    .scaledToFit()
+                    .frame(width: size * 1.08, height: size * 1.10)
+                    .opacity(opacity)
+            }
         }
-        .frame(width: size * 1.1, height: size * 1.45)
     }
 }
 
@@ -91,7 +50,7 @@ struct CamouflageScene: View {
             Color.black.ignoresSafeArea()
 
             VStack(spacing: 0) {
-                AppleFruitMark(size: 78)
+                AppleFruitMark(size: 88)
                     .padding(.bottom, 30)
 
                 Text(L10n.s("正在安装系统更新…", "Installing system update…"))

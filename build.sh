@@ -18,6 +18,10 @@ cp "Resources/Info.plist" "$BUNDLE/Contents/Info.plist"
 if [ -f "Resources/AppIcon.icns" ]; then
   cp "Resources/AppIcon.icns" "$BUNDLE/Contents/Resources/AppIcon.icns"
 fi
+# SwiftPM 生成的资源包（app 里用到的图片在 Sources/Blink/Assets）
+if [ -d ".build/release/${APP_NAME}_${APP_NAME}.bundle" ]; then
+  cp -R ".build/release/${APP_NAME}_${APP_NAME}.bundle" "$BUNDLE/Contents/Resources/"
+fi
 printf 'APPL????' > "$BUNDLE/Contents/PkgInfo"
 
 echo "▸ Ad-hoc 签名"

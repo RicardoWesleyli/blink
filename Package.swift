@@ -10,7 +10,8 @@ let package = Package(
     targets: [
         .executableTarget(
             name: "Blink",
-            path: "Sources/Blink"
+            path: "Sources/Blink",
+            resources: [.process("Assets")]
         )
     ]
 )
