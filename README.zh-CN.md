@@ -9,16 +9,16 @@ macOS 菜单栏应用。长时间盯着屏幕时，它会打断你：全屏模�
 **[English](README.md)**
 
 <p align="center">
-  <img src="screenshots/panel-training.png" width="380" alt="Blink 菜单面板">
+  <img src="screenshots/zh/menu.png" width="380" alt="Blink 菜单面板">
 </p>
 
 ## 动起来
 
 <p align="center">
-  <img src="screenshots/blink-demo-zh.gif" width="700" alt="光点在四段动作里移动">
+  <img src="screenshots/zh/demo.gif" width="700" alt="光点在四段动作里移动">
 </p>
 
-训练里的十一秒，循环播放——四段动作，按你实际会做的顺序。另有 [24 秒完整版](media/blink-training-24s-zh.mp4)，节奏是原始的。
+训练里的十一秒，循环播放——四段动作，按你实际会做的顺序。另有 [24 秒完整版](media/training-24s-zh.mp4)，节奏是原始的。
 
 ## 为什么还要一个护眼提醒
 
@@ -30,9 +30,9 @@ Blink 把休息当成一件要**做**的事，而不是要**熬**的时间。屏
 
 <table>
 <tr>
-<td align="center" width="33%"><img src="screenshots/training-intro.png" width="260" alt="训练前"><br><b>开始前</b><br><sub>说明它做什么，以及它不申请什么。</sub></td>
-<td align="center" width="33%"><img src="screenshots/training.png" width="260" alt="跟着光点走"><br><b>过程中</b><br><sub>一个光点、一个慢圈、一次远近切换。没有字要读。</sub></td>
-<td align="center" width="33%"><img src="screenshots/training-finish.png" width="260" alt="完成"><br><b>结束后</b><br><sub>一句话，以及「我要走开」的选择。</sub></td>
+<td align="center" width="33%"><img src="screenshots/zh/training-intro.png" width="260" alt="训练前"><br><b>开始前</b><br><sub>说明它做什么，以及它不申请什么。</sub></td>
+<td align="center" width="33%"><img src="screenshots/zh/training.png" width="260" alt="跟着光点走"><br><b>过程中</b><br><sub>一个光点、一个慢圈、一次远近切换。没有字要读。</sub></td>
+<td align="center" width="33%"><img src="screenshots/zh/training-finish.png" width="260" alt="完成"><br><b>结束后</b><br><sub>一句话，以及「我要走开」的选择。</sub></td>
 </tr>
 </table>
 
@@ -41,7 +41,7 @@ Blink 把休息当成一件要**做**的事，而不是要**熬**的时间。屏
 背后是你自己的桌面，被系统实时高斯模糊，不是一块黑板（下图是离屏渲染的截图，实际运行时能看到你自己桌面的模糊轮廓）。圆环按已用时间顺时针长满，中间数字倒计时；鼠标移入圆环就暂停，不用找按钮。
 
 <p align="center">
-  <img src="screenshots/break.png" width="720" alt="全屏休息">
+  <img src="screenshots/zh/break.png" width="720" alt="全屏休息">
 </p>
 
 ## 四套课程
@@ -62,7 +62,7 @@ Blink 会按当前时间和今天已经做了几套，自己挑一套。
 一套做完，可以把屏幕装成系统更新界面。点任意处回来，三分钟自动退出。想离开电脑一会儿，又不想让它看起来空着，就用这个。
 
 <p align="center">
-  <img src="screenshots/camouflage.png" width="720" alt="离开伪装页">
+  <img src="screenshots/zh/camouflage.png" width="720" alt="离开伪装页">
 </p>
 
 ## 提醒
@@ -70,7 +70,7 @@ Blink 会按当前时间和今天已经做了几套，自己挑一套。
 间隔 5–240 分钟，休息时长 10 秒到 10 分钟，都带预设。提醒卡从菜单栏图标下方滑出来，从不抢焦点。它还会等：你离开键盘，或者前台应用在放全屏，计时就停住，不会在你刚回来的那一刻扑上来。
 
 <p align="center">
-  <img src="screenshots/reminder-card.png" width="300" alt="提醒卡">
+  <img src="screenshots/zh/reminder-card.png" width="300" alt="提醒卡">
 </p>
 
 ## 安装

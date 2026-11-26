@@ -15,10 +15,10 @@ No camera. No gaze tracking. No screen capture. No network.
 ## In motion
 
 <p align="center">
-  <img src="screenshots/blink-demo.gif" width="700" alt="The dot moving through four routines">
+  <img src="screenshots/en/demo.gif" width="700" alt="The dot moving through four routines">
 </p>
 
-Eleven seconds out of a session, looping — four movements, in the order you'd actually do them. The [24-second version](media/blink-training-24s-en.mp4) keeps the original pacing.
+Eleven seconds out of a session, looping — four movements, in the order you'd actually do them. The [24-second version](media/training-24s-en.mp4) keeps the original pacing.
 
 ## Why another break reminder
 

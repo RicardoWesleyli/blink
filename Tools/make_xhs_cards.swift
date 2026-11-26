@@ -135,7 +135,7 @@ do {
     let rect = NSRect(x: (W - panelW) / 2, y: -80, width: panelW, height: panelH)
     c.card(rect.insetBy(dx: -3, dy: -3), radius: 34, fill: NSColor.black.withAlphaComponent(0.35))
     c.clipCard(rect, radius: 32) {
-        c.image("\(repo)/screenshots/panel-training.png", at: rect)
+        c.image("\(repo)/screenshots/zh/menu.png", at: rect)
     }
 
     c.save("\(outDir)/01-cover.png")
@@ -164,7 +164,7 @@ do {
     let rect = NSRect(x: (W - imgW) / 2, y: 118, width: imgW, height: imgH)
     c.card(rect.insetBy(dx: -3, dy: -3), radius: 26, fill: .black)
     c.clipCard(rect, radius: 24) {
-        c.image("\(repo)/screenshots/break.png",
+        c.image("\(repo)/screenshots/zh/break.png",
                 from: NSRect(x: 290, y: 130, width: 700, height: 480),
                 at: rect)
     }
@@ -252,7 +252,7 @@ do {
     let rect = NSRect(x: (W - imgW) / 2, y: 1440 - 700 - imgH, width: imgW, height: imgH)
     c.card(rect.insetBy(dx: -3, dy: -3), radius: 26, fill: .black)
     c.clipCard(rect, radius: 24) {
-        c.image("\(repo)/screenshots/camouflage.png", at: rect)
+        c.image("\(repo)/screenshots/zh/camouflage.png", at: rect)
     }
 
     c.text("实心苹果剪影，不带咬口，不是 Apple 商标。",
