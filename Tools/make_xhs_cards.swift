@@ -255,7 +255,7 @@ do {
         c.image("\(repo)/screenshots/camouflage.png", at: rect)
     }
 
-    c.text("图标是自己画的苹果，没有咬口，不是别人的商标。",
+    c.text("实心苹果剪影，不带咬口，不是 Apple 商标。",
            font: .systemFont(ofSize: 24, weight: .regular),
            color: NSColor.white.withAlphaComponent(0.35), x: 88, topY: 1216, width: 900)
     c.footer("这个按钮是可选的，不点它也能正常结束训练")
