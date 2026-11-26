@@ -16,21 +16,39 @@ final class CamouflageSession: ObservableObject {
 }
 
 /// 一个完整的苹果：没有咬口，也就不是 Apple 的标志。
-/// 由三段椭圆并集成轮廓，避免把商标画进去。
+/// 用一条连续的手绘轮廓，顶部中间下凹（果梗的位置），两侧圆润，底部收拢，
+/// 比并集一堆椭圆更容易做出"苹果"的体感。
 struct AppleFruitShape: Shape {
     func path(in rect: CGRect) -> Path {
         var p = Path()
-        let s = min(rect.width, rect.height)
-        let cx = rect.midX
-        let cy = rect.midY + s * 0.08
-        let r = s * 0.33
+        let w = rect.width
+        let h = rect.height
 
-        p.addEllipse(in: CGRect(x: cx - r * 1.36, y: cy - r * 1.10,
-                                width: r * 1.92, height: r * 1.92))
-        p.addEllipse(in: CGRect(x: cx - r * 0.56, y: cy - r * 1.10,
-                                width: r * 1.92, height: r * 1.92))
-        p.addEllipse(in: CGRect(x: cx - r * 1.00, y: cy - r * 0.62,
-                                width: r * 2.00, height: r * 2.00))
+        func pt(_ x: CGFloat, _ y: CGFloat) -> CGPoint {
+            CGPoint(x: rect.minX + x * w, y: rect.minY + y * h)
+        }
+
+        p.move(to: pt(0.50, 0.17))
+        p.addCurve(to: pt(0.86, 0.40), control1: pt(0.70, 0.11), control2: pt(0.85, 0.23))
+        p.addCurve(to: pt(0.92, 0.68), control1: pt(0.96, 0.48), control2: pt(0.98, 0.58))
+        p.addCurve(to: pt(0.50, 0.99), control1: pt(0.90, 0.88), control2: pt(0.68, 1.00))
+        p.addCurve(to: pt(0.08, 0.68), control1: pt(0.32, 1.00), control2: pt(0.10, 0.88))
+        p.addCurve(to: pt(0.14, 0.40), control1: pt(0.02, 0.58), control2: pt(0.04, 0.48))
+        p.addCurve(to: pt(0.50, 0.17), control1: pt(0.15, 0.23), control2: pt(0.30, 0.11))
+        return p
+    }
+}
+
+/// 一片两头尖的叶子，比椭圆更像叶，不会堆成菠萝冠。
+struct AppleLeafShape: Shape {
+    func path(in rect: CGRect) -> Path {
+        var p = Path()
+        func pt(_ x: CGFloat, _ y: CGFloat) -> CGPoint {
+            CGPoint(x: rect.minX + x * rect.width, y: rect.minY + y * rect.height)
+        }
+        p.move(to: pt(0.02, 0.55))
+        p.addQuadCurve(to: pt(0.98, 0.08), control: pt(0.34, -0.04))
+        p.addQuadCurve(to: pt(0.02, 0.55), control: pt(0.42, 0.78))
         return p
     }
 }
@@ -43,21 +61,22 @@ struct AppleFruitMark: View {
         ZStack {
             AppleFruitShape()
                 .fill(tint)
-                .frame(width: size, height: size * 1.02)
+                .frame(width: size * 0.96, height: size * 1.02)
+                .offset(y: size * 0.12)
 
-            // 茎
+            // 梗
             Capsule()
                 .fill(tint)
-                .frame(width: size * 0.075, height: size * 0.22)
-                .rotationEffect(.degrees(6))
-                .offset(x: size * 0.01, y: -size * 0.52)
+                .frame(width: size * 0.058, height: size * 0.20)
+                .rotationEffect(.degrees(10))
+                .offset(x: size * 0.02, y: -size * 0.315)
 
             // 叶
-            Ellipse()
+            AppleLeafShape()
                 .fill(tint)
-                .frame(width: size * 0.42, height: size * 0.20)
-                .rotationEffect(.degrees(-34))
-                .offset(x: size * 0.20, y: -size * 0.555)
+                .frame(width: size * 0.50, height: size * 0.22)
+                .rotationEffect(.degrees(-22))
+                .offset(x: size * 0.225, y: -size * 0.36)
         }
         .frame(width: size * 1.1, height: size * 1.45)
     }
