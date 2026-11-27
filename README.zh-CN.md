@@ -2,15 +2,36 @@
 
 **一次能让眼睛真正松开的休息。**
 
+<p align="center">
+  <img src="screenshots/zh/x-hero.png" width="100%" alt="Blink — 眼睛的休息，就在菜单栏里">
+</p>
+
 macOS 菜单栏应用。长时间盯着屏幕时，它会打断你：全屏模糊、圆环走满，然后带着眼睛做完一小套动作——跟着光点、绕一个圈、看远看近、最后闭上。
 
 不开摄像头，不做眼动追踪，不录屏，不联网。
 
 **[English](README.md)**
 
-<p align="center">
-  <img src="screenshots/zh/menu.png" width="380" alt="Blink 菜单面板">
-</p>
+## 安装
+
+1. 从 [Releases](../../releases/latest) 下载 `Blink.dmg`，约 700 KB
+2. 打开 dmg，**双击「安装 Blink.command」**——不要拖拽，拖进 Applications 会被 Gatekeeper 拦
+3. 菜单栏右侧出现一只眼睛。Dock 里没有图标，不弹任何权限请求，不用配置
+
+应用是 ad-hoc 签名、尚未公证（Developer ID 一年 $99，我想先看看有多少人真的会一直装着它）。dmg 里的脚本会清掉隔离标记并装到 `/Applications`。想手动装：
+
+```bash
+xattr -cr /Applications/Blink.app
+open /Applications/Blink.app
+```
+
+要求 macOS 13 或更高，Apple 芯片与 Intel 都可以。
+
+## 为什么还要一个护眼提醒
+
+几乎所有休息类应用都在提醒你「看远处」。看二十秒，然后回到同一个姿势，什么都没改变。
+
+Blink 把休息当成一件要**做**的事，而不是要**熬**的时间。屏幕模糊下去，圆环开始走，一个光点开始移动。你的眼睛跟着它，离开中心、绕圈、远近切换。全程 60 到 90 秒，画面上没有字要读。
 
 ## 动起来
 
@@ -19,12 +40,6 @@ macOS 菜单栏应用。长时间盯着屏幕时，它会打断你：全屏模�
 </p>
 
 训练里的十一秒，循环播放——四段动作，按你实际会做的顺序。另有 [24 秒完整版](media/training-24s-zh.mp4)，节奏是原始的。
-
-## 为什么还要一个护眼提醒
-
-几乎所有休息类应用都在提醒你「看远处」。看二十秒，然后回到同一个姿势，什么都没改变。
-
-Blink 把休息当成一件要**做**的事，而不是要**熬**的时间。屏幕模糊下去，圆环开始走，一个光点开始移动。你的眼睛跟着它，离开中心、绕圈、远近切换。全程 60 到 90 秒，画面上没有字要读。
 
 ## 一次训练，三屏
 
@@ -73,21 +88,6 @@ Blink 会按当前时间和今天已经做了几套，自己挑一套。
   <img src="screenshots/zh/reminder-card.png" width="300" alt="提醒卡">
 </p>
 
-## 安装
-
-1. 从 [Releases](../../releases/latest) 下载 `Blink.dmg`
-2. 打开 dmg，**双击「安装 Blink.command」**，不要拖拽
-3. 菜单栏右侧出现一只眼睛，Dock 里没有图标
-
-应用是 ad-hoc 签名、尚未公证，所以直接拖进 Applications 会被 Gatekeeper 拦。dmg 里的脚本会清掉隔离标记并装到 `/Applications`。想手动装：
-
-```bash
-xattr -cr /Applications/Blink.app
-open /Applications/Blink.app
-```
-
-要求 macOS 13 或更高，Apple 芯片与 Intel 都可以。
-
 ## 隐私
 
 训练是纯视觉引导的，所以什么都不需要被测量。
@@ -103,6 +103,14 @@ open /Applications/Blink.app
 那些是提醒应用，计时器就是产品，休息是一段被打断的空白。
 
 Blink 保留提醒，因为休息总得被触发；但产品是触发之后的那两分钟——眼睛要做什么。你要跟着光点走，不是盯着倒计时。
+
+## 现状
+
+早期版本，如实说明：
+
+- ad-hoc 签名，本机可用；别人下载会被 Gatekeeper 拦，dmg 里的脚本负责处理
+- 尚未公证，需要 Developer ID（$99/年）。想先看看有多少人真的会一直装着它
+- 不做注视点追踪：Mac 没有 TrueDepth，Vision 只给眼睑关键点，拿不到瞳孔位置。所以动作是固定的，不是自适应的
 
 ## 从源码构建
 
@@ -143,17 +151,9 @@ Sources/Blink/
     TrainingScene.swift       训练界面与完成页
     BlurBackdrop.swift        高斯模糊背景
 Resources/                    Info.plist、图标、dmg 内安装脚本
-Tools/                        图标生成、视频渲染
+Tools/                        图标生成、视频渲染、卡片渲染
 build.sh                      编译 → 组装 → 签名 → 打 dmg
 ```
-
-## 现状
-
-早期版本，如实说明：
-
-- ad-hoc 签名，本机可用；别人下载会被 Gatekeeper 拦，dmg 里的脚本负责处理
-- 尚未公证，需要 Developer ID（$99/年）。想先看看有多少人真的会一直装着它
-- 不做注视点追踪：Mac 没有 TrueDepth，Vision 只给眼睑关键点，拿不到瞳孔位置。所以动作是固定的，不是自适应的
 
 ## 许可
 

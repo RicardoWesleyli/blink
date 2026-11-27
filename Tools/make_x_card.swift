@@ -1,7 +1,8 @@
 import AppKit
 
-// 生成 X（Twitter）用的 1600×900 主视觉卡片
-// 用法：swift Tools/make_x_card.swift screenshots/en/menu.png screenshots/en/x-hero.png
+// 生成 1600×900 主视觉卡片（README 首屏 / X / 小红书通用）
+// 用法：swift Tools/make_x_card.swift screenshots/en/menu.png screenshots/en/x-hero.png en
+//       swift Tools/make_x_card.swift screenshots/zh/menu.png screenshots/zh/x-hero.png zh
 
 let W: CGFloat = 1600
 let H: CGFloat = 900
@@ -91,31 +92,39 @@ panel.draw(in: cardRect, from: .zero, operation: .sourceOver, fraction: 1)
 NSGraphicsContext.restoreGraphicsState()
 
 // 右侧文案
+let lang = args.count >= 4 ? args[3] : "en"
+let zh = lang == "zh"
+
 let tx: CGFloat = 640.0
 let textW: CGFloat = 900.0
 
 draw("Blink", font: roundedFont(100, .semibold),
      color: .white, x: tx, topY: 250, width: textW, spacing: -1.5)
 
-draw("Eye breaks in the menu bar.", font: roundedFont(34, .medium),
-     color: NSColor.white.withAlphaComponent(0.88), x: tx, topY: 372, width: textW)
+draw(zh ? "眼睛的休息，就在菜单栏里。" : "Eye breaks in the menu bar.",
+     font: roundedFont(zh ? 38 : 34, .medium),
+     color: NSColor.white.withAlphaComponent(0.88), x: tx, topY: zh ? 366 : 372, width: textW)
 
-let bullets: [(String, String)] = [
-    ("Guided routines", "Four 20-second paths for different times of day"),
+let bullets: [(String, String)] = zh ? [
+    ("引导式训练", "四套课程，每套 60–90 秒，跟着光点走"),
+    ("全屏模糊休息", "屏幕柔和暗下，不是弹一个窗"),
+    ("不碰摄像头，不联网", "全程零网络请求，数据只在本机")
+] : [
+    ("Guided routines", "Four routines, 60–90 seconds each"),
     ("Blurred full-screen break", "The screen goes soft, not a popup"),
     ("No camera, no telemetry", "It never opens a network connection")
 ]
 var y: CGFloat = 462
 for (title, sub) in bullets {
-    draw(title, font: .systemFont(ofSize: 25, weight: .medium),
+    draw(title, font: .systemFont(ofSize: zh ? 27 : 25, weight: .medium),
          color: NSColor.white.withAlphaComponent(0.92), x: tx, topY: y, width: textW)
     draw(sub, font: .systemFont(ofSize: 18, weight: .regular),
-         color: NSColor.white.withAlphaComponent(0.42), x: tx, topY: y + 34, width: textW)
-    y += 92
+         color: NSColor.white.withAlphaComponent(0.42), x: tx, topY: y + 38, width: textW)
+    y += 96
 }
 
 // 底栏标签
-draw("MIT licensed   ·   macOS 13+   ·   English / 中文   ·   free",
+draw(zh ? "MIT 开源   ·   macOS 13+   ·   中 / 英 双语   ·   免费" : "MIT licensed   ·   macOS 13+   ·   English / 中文   ·   free",
      font: .systemFont(ofSize: 17, weight: .regular),
      color: NSColor.white.withAlphaComponent(0.30), x: tx, topY: 812, width: textW, spacing: 0.4)
 

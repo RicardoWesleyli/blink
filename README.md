@@ -2,15 +2,36 @@
 
 **Eye breaks your eyes can actually feel.**
 
-A macOS menu bar app that interrupts long screen sessions with a full-screen rest — then walks your eyes through a short routine: follow a dot, trace a circle, shift focus far and near, and finally close them.
+<p align="center">
+  <img src="screenshots/en/x-hero.png" width="100%" alt="Blink — eye breaks in the menu bar">
+</p>
+
+A macOS menu bar app that interrupts long screen sessions with a full-screen rest, then walks your eyes through a short routine: follow a dot, trace a circle, shift focus far and near, and finally close them.
 
 No camera. No gaze tracking. No screen capture. No network.
 
 **[中文说明](README.zh-CN.md)**
 
-<p align="center">
-  <img src="screenshots/en/menu.png" width="380" alt="Blink menu bar panel">
-</p>
+## Install
+
+1. Download `Blink.dmg` from the [latest release](../../releases/latest) — about 700 KB.
+2. Open the dmg and **double-click「安装 Blink.command」**. Don't drag the app into Applications; Gatekeeper will block it.
+3. The menu bar gets an eye icon. No Dock icon, no permission prompt, nothing to configure.
+
+The app is ad-hoc signed, not notarized yet — a Developer ID costs $99/year and I'd rather see whether people keep it installed first. The included script clears the quarantine flag and installs to `/Applications`. By hand, if you prefer:
+
+```bash
+xattr -cr /Applications/Blink.app
+open /Applications/Blink.app
+```
+
+Requires macOS 13 or later, Apple silicon or Intel.
+
+## Why another break reminder
+
+Every break app tells you to look away. Twenty seconds later you go back to the same stare, and nothing has changed.
+
+Blink treats the break as something you *do*, not something you wait out. The screen blurs, a ring fills up, and a dot starts moving. Your eyes follow it — off-center, in a slow circle, far then near. It takes 60 to 90 seconds and there is nothing to read.
 
 ## In motion
 
@@ -19,12 +40,6 @@ No camera. No gaze tracking. No screen capture. No network.
 </p>
 
 Eleven seconds out of a session, looping — four movements, in the order you'd actually do them. The [24-second version](media/training-24s-en.mp4) keeps the original pacing.
-
-## Why another break reminder
-
-Every break app tells you to look away. Twenty seconds later you go back to the same stare, and nothing has changed.
-
-Blink treats the break as something you *do*, not something you wait out. The screen blurs, a ring fills up, and a dot starts moving. Your eyes follow it — off-center, in a slow circle, far then near. It takes 60 to 90 seconds and there is nothing to read.
 
 ## One session, three screens
 
@@ -73,21 +88,6 @@ Interval 5–240 minutes, break length 10 seconds to 10 minutes, both with prese
   <img src="screenshots/en/reminder-card.png" width="300" alt="Reminder card">
 </p>
 
-## Install
-
-1. Download `Blink.dmg` from the [latest release](../../releases/latest).
-2. Open the dmg and **double-click「安装 Blink.command」**. Don't drag the app.
-3. The menu bar gets an eye. There is no Dock icon.
-
-The app is ad-hoc signed, not notarized, so dragging it into Applications is blocked by Gatekeeper. The included script clears the quarantine flag and installs to `/Applications`. If you'd rather do it by hand:
-
-```bash
-xattr -cr /Applications/Blink.app
-open /Applications/Blink.app
-```
-
-Requires macOS 13 or later, Apple silicon or Intel.
-
 ## Privacy
 
 The training is visually guided, which means nothing needs to be measured.
@@ -103,6 +103,14 @@ More in [PRIVACY.md](PRIVACY.md).
 Those are reminder apps. The timer is the product, and the break is a pause.
 
 Blink keeps the reminder because a break still has to be triggered — but the product is the two minutes after it. Blink is about what your eyes do during the break: a guided routine you follow with your eyes instead of a countdown you watch.
+
+## Status
+
+Early, and honest about it.
+
+- Ad-hoc signed. Works locally, but Gatekeeper will complain for anyone who downloads it — the installer script handles that.
+- No notarization yet. That needs a Developer ID, and I'd rather see whether people keep it installed first.
+- No gaze tracking. Macs have no TrueDepth camera, and Vision only exposes eyelid landmarks, not pupil position. That's why the routine is fixed rather than adaptive.
 
 ## Build from source
 
@@ -145,17 +153,9 @@ Sources/Blink/
     TrainingScene.swift       Training + finish page
     BlurBackdrop.swift        Gaussian blur backdrop
 Resources/                    Info.plist, icon, installer script
-Tools/                        Icon generation, video rendering
+Tools/                        Icon generation, video rendering, card rendering
 build.sh                      build → bundle → sign → dmg
 ```
-
-## Status
-
-Early, and honest about it.
-
-- Ad-hoc signed. Works locally, but Gatekeeper will complain for anyone who downloads it — the installer script handles that.
-- No notarization yet. That needs a Developer ID, and I'd rather see whether people keep it installed first.
-- No gaze tracking. Macs have no TrueDepth camera, and Vision only exposes eyelid landmarks, not pupil position. That's why the routine is fixed rather than adaptive.
 
 ## License
 
